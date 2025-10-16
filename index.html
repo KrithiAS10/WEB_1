@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Krithi A S - Portfolio & Resume</title>
+    <meta
+      name="description"
+      content="Portfolio of Krithi A S - 3rd year CSE student at AJ Institute of Engineering and Technology. Learning DevOps, C, Java, JavaScript, SQL, and UI/UX design."
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --primary: 220 90% 56%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 220 14% 96%;
+        --secondary-foreground: 220 9% 46%;
+        --accent: 220 14% 96%;
+        --accent-foreground: 220 9% 46%;
+        --background: 0 0% 100%;
+        --foreground: 222 47% 11%;
+        --card: 0 0% 100%;
+        --card-foreground: 222 47% 11%;
+        --muted: 220 14% 96%;
+        --muted-foreground: 220 9% 46%;
+        --border: 220 13% 91%;
+        --radius: 0.5rem;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        line-height: 1.6;
+        color: hsl(var(--foreground));
+        background: hsl(var(--background));
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      nav {
+        background: hsl(var(--background));
+        border-bottom: 1px solid hsl(var(--border));
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 1rem 0;
+        backdrop-filter: blur(10px);
+        background: hsl(var(--background) / 0.95);
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: hsl(var(--primary));
+      }
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: hsl(var(--foreground));
+        font-weight: 500;
+        transition: color 0.2s ease;
+        will-change: color;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: hsl(var(--primary));
+      }
+      .mobile-menu-btn {
+        display: none;
+        background: 0;
+        border: 0;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: hsl(var(--foreground));
+      }
+
+      .page-section {
+        display: none;
+        min-height: calc(100vh - 80px);
+        padding: 4rem 0;
+      }
+      .page-section.active {
+        display: block;
+        animation: fadeIn 0.3s ease-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero {
+        text-align: center;
+        padding: 6rem 0;
+      }
+      .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        background: linear-gradient(
+          135deg,
+          hsl(var(--primary)),
+          hsl(220 90% 70%)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero .tagline {
+        font-size: 1.5rem;
+        color: hsl(var(--muted-foreground));
+        margin-bottom: 2rem;
+      }
+      .hero p {
+        font-size: 1.125rem;
+        color: hsl(var(--secondary-foreground));
+        max-width: 800px;
+        margin: 0 auto 3rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.75rem 2rem;
+        margin: 0.5rem;
+        border-radius: var(--radius);
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease,
+          background 0.2s ease;
+        cursor: pointer;
+        border: 0;
+        font-size: 1rem;
+        will-change: transform;
+      }
+      .btn-primary {
+        background: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+      }
+      .btn-primary:hover {
+        background: hsl(220 90% 50%);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      .btn-outline {
+        border: 2px solid hsl(var(--primary));
+        color: hsl(var(--primary));
+        background: 0;
+      }
+      .btn-outline:hover {
+        background: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+      .card {
+        background: hsl(var(--card));
+        border: 1px solid hsl(var(--border));
+        border-radius: var(--radius);
+        padding: 2rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        will-change: transform;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-icon {
+        width: 50px;
+        height: 50px;
+        background: hsl(var(--primary) / 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        color: hsl(var(--primary));
+      }
+
+      .card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .card p {
+        color: hsl(var(--muted-foreground));
+      }
+
+      /* Page Header */
+      .page-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .page-header h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+      }
+
+      .page-header p {
+        color: hsl(var(--muted-foreground));
+        font-size: 1.125rem;
+      }
+
+      /* Experience/Education Items */
+      .timeline-item {
+        background: hsl(var(--card));
+        border: 1px solid hsl(var(--border));
+        border-radius: var(--radius);
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .timeline-item h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-item .company {
+        color: hsl(var(--primary));
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-item .date {
+        color: hsl(var(--muted-foreground));
+        margin-bottom: 1rem;
+      }
+
+      .timeline-item ul {
+        margin-left: 1.5rem;
+        color: hsl(var(--secondary-foreground));
+      }
+
+      .timeline-item li {
+        margin-bottom: 0.5rem;
+      }
+
+      /* Skills Section */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .skill-category h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 0.375rem 0.75rem;
+        margin: 0.25rem;
+        background: hsl(var(--secondary));
+        color: hsl(var(--secondary-foreground));
+        border-radius: calc(var(--radius) - 2px);
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      /* Contact Info */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .contact-icon {
+        width: 40px;
+        height: 40px;
+        background: hsl(var(--primary) / 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: hsl(var(--primary));
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin: 2rem 0;
+      }
+
+      .social-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid hsl(var(--border));
+        color: hsl(var(--foreground));
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+
+      .social-btn:hover {
+        background: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+        border-color: hsl(var(--primary));
+      }
+
+      /* Bio Styles */
+      .bio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .bio-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.5rem;
+        background: hsl(var(--card));
+        border: 1px solid hsl(var(--border));
+        border-radius: var(--radius);
+      }
+
+      .interests-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+      }
+
+      .fun-facts {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: hsl(var(--background));
+          border-bottom: 1px solid hsl(var(--border));
+          padding: 1rem;
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero .tagline {
+          font-size: 1.25rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="container">
+        <div class="nav-container">
+          <div class="logo">Portfolio</div>
+          <ul class="nav-links" id="navLinks">
+            <li>
+              <a href="#" onclick="showPage('home')" class="active">Home</a>
+            </li>
+            <li><a href="#" onclick="showPage('resume')">Resume</a></li>
+            <li><a href="#" onclick="showPage('bio')">Bio</a></li>
+            <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+          </ul>
+          <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            ☰
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Home Page -->
+    <section id="home" class="page-section active">
+      <div class="container">
+        <div class="hero">
+          <h1>Krithi A S</h1>
+          <p class="tagline">Computer Science Student & Aspiring Developer</p>
+          <p>
+            3rd year CSE student at AJ Institute of Engineering and Technology.
+            Passionate about learning DevOps, programming, and UI/UX design.
+          </p>
+          <p>
+            Currently exploring modern technologies and building my skills in C,
+            Java, JavaScript, SQL, and DevOps practices. Always eager to learn
+            and take on new challenges.
+          </p>
+          <div>
+            <button class="btn btn-primary" onclick="showPage('resume')">
+              View Resume
+            </button>
+            <button class="btn btn-outline" onclick="showPage('contact')">
+              Get in Touch
+            </button>
+          </div>
+        </div>
+
+        <div class="card-grid">
+          <div
+            class="card"
+            onclick="showPage('resume')"
+            style="cursor: pointer"
+          >
+            <div class="card-icon">📄</div>
+            <h3>Resume</h3>
+            <p>
+              View my professional experience, education, and technical skills.
+            </p>
+          </div>
+          <div class="card" onclick="showPage('bio')" style="cursor: pointer">
+            <div class="card-icon">👤</div>
+            <h3>Bio</h3>
+            <p>
+              Learn more about my background, interests, and what drives me.
+            </p>
+          </div>
+          <div
+            class="card"
+            onclick="showPage('contact')"
+            style="cursor: pointer"
+          >
+            <div class="card-icon">✉️</div>
+            <h3>Contact</h3>
+            <p>
+              Get in touch for opportunities, collaborations, or just to say
+              hello.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resume Page -->
+    <section id="resume" class="page-section">
+      <div class="container">
+        <div class="page-header">
+          <h1>Resume</h1>
+          <p>Professional Experience & Skills</p>
+        </div>
+
+        <h2 style="margin-bottom: 1.5rem; font-size: 2rem">
+          Experience & Projects
+        </h2>
+
+        <div class="timeline-item">
+          <h3>Learning DevOps</h3>
+          <div class="company">Self-Study</div>
+          <div class="date">2025 - Present</div>
+          <ul>
+            <li>Started learning DevOps fundamentals</li>
+            <li>Exploring Docker and Kubernetes</li>
+            <li>Understanding CI/CD pipelines</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <h3>Academic Projects</h3>
+          <div class="company">AJ Institute of Engineering and Technology</div>
+          <div class="date">2022 - Present</div>
+          <ul>
+            <li>Developed multiple course projects</li>
+            <li>Learning UI/UX design principles</li>
+            <li>Building web applications</li>
+          </ul>
+        </div>
+
+        <h2 style="margin: 3rem 0 1.5rem; font-size: 2rem">Education</h2>
+
+        <div class="timeline-item">
+          <h3>BE in Computer Science and Engineering</h3>
+          <div class="company">AJ Institute of Engineering and Technology</div>
+          <div class="date">2022 - Present</div>
+          <ul>
+            <li>Currently in 3rd year</li>
+            <li>Focusing on software development and modern technologies</li>
+          </ul>
+        </div>
+
+        <h2 style="margin: 3rem 0 1.5rem; font-size: 2rem">Technical Skills</h2>
+
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Programming Languages</h3>
+            <div>
+              <span class="badge">C</span>
+              <span class="badge">Java</span>
+              <span class="badge">JavaScript</span>
+              <span class="badge">SQL</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Currently Learning</h3>
+            <div>
+              <span class="badge">DevOps</span>
+              <span class="badge">Docker</span>
+              <span class="badge">CI/CD</span>
+              <span class="badge">Kubernetes</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Design</h3>
+            <div>
+              <span class="badge">UI/UX Design</span>
+              <span class="badge">User Interface</span>
+              <span class="badge">User Experience</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Soft Skills</h3>
+            <div>
+              <span class="badge">Problem Solving</span>
+              <span class="badge">Quick Learner</span>
+              <span class="badge">Team Collaboration</span>
+              <span class="badge">Adaptability</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bio Page -->
+    <section id="bio" class="page-section">
+      <div class="container">
+        <div class="page-header">
+          <h1>About Me</h1>
+          <p>Getting to know the person behind the code</p>
+        </div>
+
+        <div class="card">
+          <h2 style="margin-bottom: 1rem; font-size: 2rem">My Story</h2>
+          <p style="margin-bottom: 1rem">
+            I'm a 3rd year Computer Science Engineering student at AJ Institute
+            of Engineering and Technology, passionate about technology and
+            software development. My journey in tech started with learning
+            programming fundamentals, and I've been constantly expanding my
+            knowledge ever since.
+          </p>
+          <p style="margin-bottom: 1rem">
+            Currently, I'm diving into DevOps practices and tools, while
+            strengthening my foundation in C, Java, SQL,and JavaScript. I'm also
+            exploring UI/UX design to create better user experiences. I believe
+            in learning by doing and constantly challenging myself with new
+            technologies.
+          </p>
+          <p>
+            My approach to learning is hands-on and practical. I'm excited about
+            the endless possibilities in technology and eager to build solutions
+            that make a difference. Whether it's coding, designing interfaces,
+            or understanding DevOps workflows, I'm always ready to learn
+            something new.
+          </p>
+        </div>
+
+        <h2 style="margin: 3rem 0 1.5rem; font-size: 2rem">Personal Details</h2>
+        <div class="bio-grid">
+          <div class="bio-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div style="font-weight: 600">Location</div>
+              <div style="color: hsl(var(--muted-foreground))">Manglore</div>
+            </div>
+          </div>
+          <div class="bio-item">
+            <div class="contact-icon">🎓</div>
+            <div>
+              <div style="font-weight: 600">Education</div>
+              <div style="color: hsl(var(--muted-foreground))">
+                BE in CSE (3rd Year) - AJ Institute
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 style="margin: 3rem 0 1.5rem; font-size: 2rem">
+          Interests & Hobbies
+        </h2>
+        <div class="interests-grid">
+          <div class="card">
+            <h3>Technology & Learning</h3>
+            <ul style="margin-left: 1.5rem; margin-top: 1rem">
+              <li>Learning DevOps tools and practices</li>
+              <li>Practicing C, Java, SQL, and JavaScript</li>
+              <li>Exploring UI/UX design principles</li>
+              <li>Working on academic projects</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Personal Interests</h3>
+            <ul style="margin-left: 1.5rem; margin-top: 1rem">
+              <li>Technology and innovation</li>
+              <li>Web development trends</li>
+              <li>Design and creativity</li>
+              <li>Continuous learning</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 style="margin: 3rem 0 1.5rem; font-size: 2rem">Fun Facts</h2>
+        <div class="fun-facts">
+          <div class="card">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem">🎓</div>
+            <div style="font-weight: 600; margin-bottom: 0.5rem">
+              CSE Student
+            </div>
+            <p>Currently in 3rd year at AJ Institute</p>
+          </div>
+          <div class="card">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem">🚀</div>
+            <div style="font-weight: 600; margin-bottom: 0.5rem">
+              Learning DevOps
+            </div>
+            <p>Just started exploring DevOps tools</p>
+          </div>
+          <div class="card">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem">💻</div>
+            <div style="font-weight: 600; margin-bottom: 0.5rem">
+              Multi-language
+            </div>
+            <p>Know C, Java, JavaScript, SQL, tailwindCSS, & UI/UX</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="page-section">
+      <div class="container">
+        <div class="page-header">
+          <h1>Get in Touch</h1>
+          <p>Let's connect and discuss opportunities</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="card">
+            <div class="contact-item">
+              <div class="contact-icon">✉️</div>
+              <div>
+                <div style="font-weight: 600; margin-bottom: 0.25rem">
+                  Email
+                </div>
+                <a
+                  href="mailto:krithisonu.a.s@gmail.com"
+                  style="color: hsl(var(--primary)); text-decoration: none"
+                  >krithisonu.a.s@gmail.com</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="contact-item">
+              <div class="contact-icon">📱</div>
+              <div>
+                <div style="font-weight: 600; margin-bottom: 0.25rem">
+                  Phone
+                </div>
+                <a
+                  href="tel:+91829697903"
+                  style="color: hsl(var(--primary)); text-decoration: none"
+                  >+91 82969 7903</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div>
+                <div style="font-weight: 600; margin-bottom: 0.25rem">
+                  Location
+                </div>
+                <div style="color: hsl(var(--muted-foreground))">Manglore</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin: 3rem 0; text-align: center">
+          <h2 style="margin-bottom: 1rem">Connect on Social Media</h2>
+          <div class="social-links">
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              class="social-btn"
+              title="LinkedIn"
+              >in</a
+            >
+            <a
+              href="https://github.com"
+              target="_blank"
+              class="social-btn"
+              title="GitHub"
+              >GH</a
+            >
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              class="social-btn"
+              title="Twitter"
+              >X</a
+            >
+          </div>
+        </div>
+
+        <div class="card-grid">
+          <div class="card">
+            <h3>Open To</h3>
+            <p style="margin-top: 1rem">
+              Internship opportunities, collaborative projects, and learning
+              experiences.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Response Time</h3>
+            <p style="margin-top: 1rem">
+              I typically respond to emails within 24-48 hours.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="card"
+          style="
+            margin-top: 3rem;
+            text-align: center;
+            background: linear-gradient(
+              135deg,
+              hsl(var(--primary) / 0.1),
+              hsl(var(--primary) / 0.05)
+            );
+          "
+        >
+          <h2 style="margin-bottom: 1rem">Let's Connect and Learn Together</h2>
+          <p style="margin-bottom: 1.5rem">
+            Whether you want to collaborate on a project or discuss technology,
+            feel free to reach out!
+          </p>
+          <a href="mailto:krithisonu.a.s@gmail.com" class="btn btn-primary"
+            >Send an Email</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const pages = document.querySelectorAll(".page-section");
+      const navLinks = document.querySelectorAll(".nav-links a");
+      const navLinksEl = document.getElementById("navLinks");
+
+      function showPage(pageId) {
+        pages.forEach((p) => p.classList.remove("active"));
+        document.getElementById(pageId).classList.add("active");
+        navLinks.forEach((l) => l.classList.remove("active"));
+        event.target.classList.add("active");
+        navLinksEl.classList.remove("active");
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+
+      function toggleMobileMenu() {
+        navLinksEl.classList.toggle("active");
+      }
+
+      document.addEventListener("click", (e) => {
+        if (!document.querySelector(".nav-container").contains(e.target)) {
+          navLinksEl.classList.remove("active");
+        }
+      });
+    </script>
+  </body>
+</html>
